@@ -15,7 +15,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    # в админке есть prepopulated_fields, возможно тут автоподстановка слаг не нужна?
+    # в админке есть prepopulated_fields, поэтому этот код не нужен
     # def save(self, *args, **kwargs):
     #     if not self.slug:
     #         self.slug = slugify(self.name)
