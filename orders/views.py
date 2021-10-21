@@ -20,7 +20,11 @@ def order_create(request):
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             # Записываем новый заказ в БД
-            order = form.save()
+            order = form.save(commit=False)
+            if cart.coupon:
+                order.coupon = cart.coupon
+                order.discount = cart.coupon.discount
+            order.save()
             # Проходим по всем товарам корзины и создаем для каждого объект OrderItem
             for item in cart:
                 OrderItem.objects.create(order=order,
